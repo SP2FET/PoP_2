@@ -105,7 +105,7 @@ void draw_menu(status_t* status)
 			draw_empty_line(menu_length);
 			cout<<endl;
 			if(status->hex_mode) cout<<menu_char<<"                      Tryb wyswietlania: Hex + tekst"<<"                         "<<menu_char<<endl;
-			else cout<<menu_char<<"                            Tryb wyswietlania: Tekst"<<"                         "<<menu_char<<endl;
+			else 				 cout<<menu_char<<"                            Tryb wyswietlania: Tekst"<<"                         "<<menu_char<<endl;
 		}    
 	else
 		{  
