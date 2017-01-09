@@ -40,7 +40,7 @@ inline void close_file(status_t* status);
 void display_text(status_t* status);
 void display_hex(status_t* status);
 void display_hex_page(status_t* status);
-void set_display_page(status_t* status);
+void set_display_page(status_t* status, int chars_per_page);
 void parse_keys(status_t* status);
 void program(status_t* status);
 void file_reload(status_t* status);
@@ -167,36 +167,40 @@ inline void close_file(status_t* status)
 void display_text(status_t* status)
 {
 	char character;
-	short chars = 0;
-	int page;
+	short chars;
 	int lines = 0;
-	string line;
-	
-	set_display_page(status);
-	
+	chars = 0;
+	int chars_per_page = menu_length*max_per_page;
 	cout<<"Tresc pliku:"<<endl<<endl;
-	//cout<<"Dlugosc: "<<status->file_length<<" Linie: "<<status->lines<<" Strony: "<<status->pages<<endl;
 	
 	
+	set_display_page(status, chars_per_page);
 	
-	 while ( getline (status->file,line) )
-   	 {
-      cout << line << '\n';
-      lines++;
-      if (lines > max_per_page)
-      {
-      	
-	  }
-   	 }	
-
+	while( status->file.get(character) )
+	{
+		cout<<character;
+		chars++;
+		if(chars >= menu_length) 
+		{
+			cout<<endl;
+			chars = 0;
+			lines++;
+		}else if ( character == 10 ) 
+		{
+			chars = 0;
+			lines++;		
+		}
+		
+		if(lines >= max_per_page) break;
+	}
 	status->file.clear();
 	status->file.seekg(0);
 	cout<<endl<<"Strona "<<status->current_page<<"/"<<status->pages<<endl;
 }
-void set_display_page(status_t* status)
+void set_display_page(status_t* status, int chars_per_page)
 {
 	
-	int chars_per_page = max_per_page * 16; 
+	
 	
 	if (status->hex_mode)
 	{
@@ -223,9 +227,9 @@ void display_hex_page(status_t* status)
 	char buffer[16];
 	bool end = false;
 	int page ;
-
+	int chars_per_page = max_per_page * 16;
 	
-	set_display_page(status);
+	set_display_page(status, chars_per_page);
 	page = status->current_page;
 	for(int j = max_per_page*(page-1); j < max_per_page*page; j++ )
 	{
