@@ -1,0 +1,10 @@
+DOWN
+X 10
+Y 3
+X -5
+Y -1
+UP
+X 10
+DOWN
+Y 4
+X -5

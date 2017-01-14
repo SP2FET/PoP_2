@@ -1,3 +1,13 @@
 Convert lowercase letter to uppercase
 Converts c to its uppercase equivalent if c is a lowercase letter and has an uppercase equivalent. If no such conversion is possible, the value returned is c unchanged.
-In other locales, if a lowercase character has more than one correspondent uppercase character, this function always returns the same character for the same value of c.
+In other locales, if a lowercase character has more than one correspondent uppercase character, this function always returns the same character for the same value of c.1234567
+DOWN
+X 10
+Y 3
+X -5
+Y -1
+UP
+X 10
+DOWN
+Y 4
+X -5
